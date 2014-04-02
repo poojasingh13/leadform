@@ -1,0 +1,6 @@
+from django.contrib import admin
+from lead.models import leadform
+
+class leadformadmin(admin.ModelAdmin):
+    pass
+admin.site.register(leadform, leadformadmin)
