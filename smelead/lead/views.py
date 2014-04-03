@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from lead.forms import smeleadForm
 from lead.models import leadform
-
+import json
 
 def index(request):
     form = smeleadForm();
@@ -17,6 +17,6 @@ def index(request):
 		emailId=form.cleaned_data['emailId']
 		contactno =form.cleaned_data['contactno']
 		leadform(name=name,organisation=organisation,city=city,emailId=emailId,contactno=contactno).save()
-		return render_to_response('thanks.html',context_instance=RequestContext(request))
+		return HttpResponse(json.dumps({'status':1}), mimetype='application/json')
                 	
     return render_to_response('index.html', {'form':form},context_instance=RequestContext(request))

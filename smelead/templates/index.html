@@ -44,7 +44,10 @@ $(document).ready(function(){
         },
         'contactno':{
             'required':true,
-            'minlength':2
+            'minlength':2,
+	    'number':true,
+            'maxlength':10
+
         },        
         'emailId':{
             'required':true,
@@ -67,7 +70,20 @@ $(document).ready(function(){
     },
     errorPlacement: function(error, element){
 	 //error.insertAfter(element);
-   }   
+   } ,
+   submitHandler: function (form) {
+    var serializedData = $(form).serialize();
+    $.ajax({
+                url: "/smelead/",
+                type: "post",
+                data: serializedData
+        }).done(function (response, textStatus, jqXHR) {                
+                if(response.status==1)
+               { alert("success awesome");}
+              
+        });
+
+   }  
 
 });
 
